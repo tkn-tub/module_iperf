@@ -1,6 +1,6 @@
 import logging
 import wishful_upis as upis
-import wishful_framework as wishful_module
+from wishful_agent.core import wishful_module
 
 __author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
