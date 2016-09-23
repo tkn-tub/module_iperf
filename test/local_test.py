@@ -25,19 +25,19 @@ class IperfController(wishful_module.ControllerModule):
     def my_start_function(self):
         self.log.info("start iperf test")
 
-        node = self.localNode
-
-        startServer = False
-        startClient = True
-
         try:
+            node = self.localNode
+
+            startServer = False
+            startClient = True
 
             if startServer:
                 self.log.info('Installing iperf server on node')
                 serverApp0 = upis.net.ServerApplication()
                 serverApp0.setBind("192.168.14.142")
                 serverApp0.setProtocol("TCP")
-                node.callback(self.appCallback).net.install_application(serverApp0)
+                server_thr = node.net.install_application(serverApp0)
+                self.log.info('Iperf client; throughput is %s' % str(server_thr['throughput']))
 
             if startClient:
                 self.log.info('Installing iperf client on node')
@@ -45,8 +45,8 @@ class IperfController(wishful_module.ControllerModule):
                 clientApp0.setDestination("192.168.14.142")
                 clientApp0.setProtocol("TCP")
 
-                thr = node.net.install_application(clientApp0)
-                self.log.info('Iperf client; throughput is %s' % str(thr['throughput']))
+                client_thr = node.net.install_application(clientApp0)
+                self.log.info('Iperf client; throughput is %s' % str(client_thr['throughput']))
 
             self.log.info('... done')
 
