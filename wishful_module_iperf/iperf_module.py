@@ -2,8 +2,10 @@ import logging
 import subprocess
 import sys
 import time
+import inspect
 import wishful_upis as upis
 from wishful_agent.core import wishful_module
+from wishful_agent.core import exceptions
 
 __author__ = "Piotr Gawlowicz, Anatolij Zubow"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
@@ -117,7 +119,9 @@ class IperfModule(wishful_module.AgentModule):
                 log.info('Application Type not supported')
 
         except Exception as e:
-            self.log.error("IperfModule:: !!!Exception!!!: {}".format(e))
+            fname = inspect.currentframe().f_code.co_name
+            self.log.fatal("An error occurred in %s: %s" % (fname, e))
+            raise exceptions.UPIFunctionExecutionFailedException(func_name=fname, err_msg=str(e))
 
     def helper_parseIperf(self, iperfOutput):
         """Parse iperf output and return bandwidth.
