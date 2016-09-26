@@ -24,9 +24,8 @@ class IperfModule(wishful_module.AgentModule):
     @wishful_module.bind_function(upis.net.install_application)
     def install_application(self, app):
 
-        log = logging.getLogger()
-        log.info('Function: install_application')
-        log.info('args = %s' % str(app))
+        self.log.info('Function: install_application')
+        self.log.info('args = %s' % str(app))
 
         try:
             appType = app.type
@@ -34,7 +33,7 @@ class IperfModule(wishful_module.AgentModule):
             protocol = app.protocol
 
             if appType == "Server":
-                log.info('Installing Server application')
+                self.log.info('Installing Server application')
 
                 # cmd = str("killall -9 iperf")
                 # os.system(cmd);
@@ -70,7 +69,7 @@ class IperfModule(wishful_module.AgentModule):
                 return msg
 
             elif appType == "Client":
-                log.info('Installing Client application')
+                self.log.info('Installing Client application')
 
                 serverIp = app.destination
                 udpBandwidth = app.udpBandwidth
@@ -116,12 +115,12 @@ class IperfModule(wishful_module.AgentModule):
                 return msg
 
             else:
-                log.info('Application Type not supported')
+                self.log.info('Application Type not supported')
 
         except Exception as e:
-            fname = inspect.currentframe().f_code.co_name
-            self.log.fatal("An error occurred in %s: %s" % (fname, e))
-            raise exceptions.UPIFunctionExecutionFailedException(func_name=fname, err_msg=str(e))
+            self.log.fatal("Install app failed: err_msg: %s" % (str(e)))
+            raise exceptions.UPIFunctionExecutionFailedException(func_name=inspect.currentframe().f_code.co_name,
+                                                                 err_msg='Failed to install app: ' + str(e))
 
     def helper_parseIperf(self, iperfOutput):
         """Parse iperf output and return bandwidth.
