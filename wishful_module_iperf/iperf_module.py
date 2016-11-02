@@ -119,8 +119,9 @@ class IperfModule(wishful_module.AgentModule):
 
         except Exception as e:
             self.log.fatal("Install app failed: err_msg: %s" % (str(e)))
-            raise exceptions.UPIFunctionExecutionFailedException(func_name=inspect.currentframe().f_code.co_name,
-                                                                 err_msg='Failed to install app: ' + str(e))
+            raise exceptions.FunctionExecutionFailedException(
+                func_name=inspect.currentframe().f_code.co_name,
+                err_msg='Failed to install app: ' + str(e))
 
     def helper_parseIperf(self, iperfOutput):
         """Parse iperf output and return bandwidth.
