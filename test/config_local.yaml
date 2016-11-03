@@ -1,4 +1,4 @@
-## WiSHFUL Agent config file
+## UniFlex Agent config file
 
 agent_config:
   name: 'Local_Controller'
@@ -14,5 +14,5 @@ controllers:
 
 modules:
   iperf:
-      module : wishful_module_iperf
+      module : uniflex_module_iperf
       class_name : IperfModule

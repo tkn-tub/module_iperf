@@ -1,10 +1,7 @@
 import logging
 import datetime
-import time
-import random
 import wishful_upis as upis
-from wishful_agent.core import wishful_module
-from wishful_agent.timer import TimerEventSender
+from uniflex.core import modules
 
 __author__ = "Anatolij Zubow"
 __copyright__ = "Copyright (c) 2016, Technische Universität Berlin"
@@ -15,13 +12,13 @@ __email__ = "{zubow}@tkn.tu-berlin.de"
 Local test of iperf component.
 '''
 
-@wishful_module.build_module
-class IperfController(wishful_module.ControllerModule):
+@modules.build_module
+class IperfController(modules.ControllerModule):
     def __init__(self):
         super(IperfController, self).__init__()
         self.log = logging.getLogger('IperfController')
 
-    @wishful_module.on_start()
+    @modules.on_start()
     def my_start_function(self):
         self.log.info("start iperf test")
 
@@ -54,6 +51,6 @@ class IperfController(wishful_module.ControllerModule):
             self.log.error("{} Ctrl:: !!!Exception!!!: {}".format(datetime.datetime.now(), e))
 
 
-    @wishful_module.on_exit()
+    @modules.on_exit()
     def my_stop_function(self):
         self.log.info("stop iperf test")

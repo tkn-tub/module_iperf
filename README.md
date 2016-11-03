@@ -1,9 +1,7 @@
-WiSHFUL iperf Driver
+UniFlex iperf Driver
 ============================
 
-This is a prototypic implementation of a wireless agent providing the Unified
-Programming Interfaces (UPIs) of the Wishful software platform for
-radio and network control.
+Wrapper for iperf
 
 ## Acknowledgement
 

@@ -1,27 +1,29 @@
 import logging
 import subprocess
 import sys
-import time
 import inspect
 import wishful_upis as upis
-from wishful_agent.core import wishful_module
-from wishful_agent.core import exceptions
+from uniflex.core import modules
+from uniflex.core import exceptions
 
 __author__ = "Piotr Gawlowicz, Anatolij Zubow"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
 __version__ = "0.1.0"
 __email__ = "{gawlowicz, zubow}@tkn.tu-berlin.de"
 
+
 '''
     Application layer - packet flows generated using IPerf tool.
 '''
-@wishful_module.build_module
-class IperfModule(wishful_module.AgentModule):
+
+
+@modules.build_module
+class IperfModule(modules.AgentModule):
     def __init__(self):
         super(IperfModule, self).__init__()
         self.log = logging.getLogger('IperfModule')
 
-    @wishful_module.bind_function(upis.net.install_application)
+    @modules.bind_function(upis.net.install_application)
     def install_application(self, app):
 
         self.log.info('Function: install_application')
