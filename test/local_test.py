@@ -12,8 +12,7 @@ __email__ = "{zubow}@tkn.tu-berlin.de"
 Local test of iperf component.
 '''
 
-@modules.build_module
-class IperfController(modules.ControllerModule):
+class IperfController(modules.ControlApplication):
     def __init__(self):
         super(IperfController, self).__init__()
         self.log = logging.getLogger('IperfController')

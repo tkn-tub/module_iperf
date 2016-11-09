@@ -16,9 +16,8 @@ __email__ = "{gawlowicz, zubow}@tkn.tu-berlin.de"
     Application layer - packet flows generated using IPerf tool.
 '''
 
-
-@modules.build_module
-class IperfModule(modules.AgentModule):
+# TODO: change it to applicationModule or protocolmodule?
+class IperfModule(modules.DeviceModule):
     def __init__(self):
         super(IperfModule, self).__init__()
         self.log = logging.getLogger('IperfModule')
