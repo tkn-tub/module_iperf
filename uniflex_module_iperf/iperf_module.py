@@ -2,7 +2,7 @@ import logging
 import subprocess
 import sys
 import inspect
-import wishful_upis as upis
+
 from uniflex.core import modules
 from uniflex.core import exceptions
 
@@ -17,12 +17,13 @@ __email__ = "{gawlowicz, zubow}@tkn.tu-berlin.de"
 '''
 
 # TODO: change it to applicationModule or protocolmodule?
+
+
 class IperfModule(modules.DeviceModule):
     def __init__(self):
         super(IperfModule, self).__init__()
         self.log = logging.getLogger('IperfModule')
 
-    @modules.bind_function(upis.net.install_application)
     def install_application(self, app):
 
         self.log.info('Function: install_application')
@@ -58,7 +59,7 @@ class IperfModule(modules.DeviceModule):
                 while True:
                     line = process.stdout.readline()
                     line = line.decode('utf-8')
-                    throughput = self.helper_parseIperf(line)
+                    throughput = self._helper_parseIperf(line)
                     if throughput:
                         break
 
@@ -104,7 +105,7 @@ class IperfModule(modules.DeviceModule):
                 while True:
                     line = process.stdout.readline()
                     line = line.decode('utf-8')
-                    throughput = self.helper_parseIperf(line)
+                    throughput = self._helper_parseIperf(line)
                     if throughput:
                         break
 
@@ -124,7 +125,7 @@ class IperfModule(modules.DeviceModule):
                 func_name=inspect.currentframe().f_code.co_name,
                 err_msg='Failed to install app: ' + str(e))
 
-    def helper_parseIperf(self, iperfOutput):
+    def _helper_parseIperf(self, iperfOutput):
         """Parse iperf output and return bandwidth.
            iperfOutput: string
            returns: result string"""
