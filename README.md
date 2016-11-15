@@ -1,7 +1,10 @@
 UniFlex iperf Driver
 ============================
 
-Wrapper for iperf
+UniFlex module for iperf
+
+## Installation:
+To install UniFlex framework with all available modules, please go through all steps in [manifest](https://github.com/uniflex/manifests) repository.
 
 ## Acknowledgement
 
